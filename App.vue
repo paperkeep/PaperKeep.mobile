@@ -1,35 +1,24 @@
 <template>
-  <view class="container">
-    <text class="text-color-primary">PaperKeep</text>
-  </view>
-  <view class="container">
-    <flat-list
-      :data="[{key: 'a'}, {key: 'b'}, {key: 'c'}]"
-      :render-item="(item) => renderList(item)"
-    />
-  </view>
+  <setup v-if="isLoaded"></setup>
 </template>
- 
-<style>
-.container {
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-.text-color-primary {
-  color: blue;
-}
-</style>
 
 <script>
-import React from 'react';
-import {Text} from 'react-native';
-    export default {
-        methods: {
-            renderList: function(item) {
-                return (<Text>{item.item.key}</Text>)
-            }
-        }
-    }
+import { Font } from "expo";
+import Setup from "./src/setup.vue";
+  export default {
+    data () {
+      return {
+        isLoaded: false
+      }
+    },
+    async mounted () { 
+      await Font.loadAsync({
+        'Roboto': require('native-base/Fonts/Roboto.ttf'),
+        'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+        'Ionicons': require('@expo/vector-icons/fonts/Ionicons.ttf'),
+      });
+      this.isLoaded = true;
+    },
+    components: { Setup }
+  };
 </script>
