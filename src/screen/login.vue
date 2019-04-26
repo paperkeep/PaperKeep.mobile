@@ -1,6 +1,6 @@
 <template>
   <nb-container v-if="loaded" :style="{backgroundColor: '#fff'}">
-    <nb-header>
+    <nb-header :style="{marginTop: metrics.statusBarHeight}">
       <nb-body>
         <nb-title>Login</nb-title>
       </nb-body>
@@ -15,7 +15,7 @@
               :on-blur="() => $v.emailValue.$touch()"
             />
           </nb-item>
-          <nb-item last :error="!$v.password.required && $v.password.$dirty">
+          <nb-item :error="!$v.password.required && $v.password.$dirty">
             <nb-input
               placeholder="Password"
               v-model="password"
@@ -40,10 +40,12 @@
 import { Dimensions, Platform, AsyncStorage } from "react-native";
 import { Toast } from 'native-base';
 import { NavigationActions } from 'vue-native-router';
+import { required, email } from 'vuelidate/lib/validators'
 import launchScreenBg from "../../assets/launchscreen-bg.png";
 import launchscreenLogo from "../../assets/logo-kitchen-sink.png";
-import { required, email } from 'vuelidate/lib/validators'
 import store from '../store';
+import Metrics from '../theme/metrics';
+
 export default {
   props: {
     navigation: {
@@ -66,6 +68,7 @@ export default {
   },
   data: function() {
     return {
+      metrics: Metrics,
       emailValue: '',
       password: '',
       loaded: false

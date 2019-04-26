@@ -1,6 +1,6 @@
 <template>
   <nb-container :style="{flex:1, backgroundColor: '#fff'}">
-    <nb-header>
+    <nb-header :style="{marginTop: metrics.statusBarHeight}">
       <nb-left>
         <nb-button
           transparent
@@ -31,7 +31,10 @@ import React from 'react';
 import Item from '../components/item';
 import { Dimensions } from 'react-native';
 import store from '../store';
+import Metrics from '../theme/metrics';
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
+
 export default {
   computed: {
     items () {
@@ -53,6 +56,9 @@ export default {
         type: type
       });
     }
+  },
+  data: {
+    metrics: Metrics,
   },
   components: {
       Item

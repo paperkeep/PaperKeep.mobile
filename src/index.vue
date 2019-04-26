@@ -4,7 +4,6 @@
   </root>
 </template>
 
-
 <script>
 import React from "react";
 import { StackNavigator, DrawerNavigator, navigationService } from "vue-native-router";
